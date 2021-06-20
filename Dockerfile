@@ -1,13 +1,25 @@
-FROM php:7.4
-COPY .  /var/www
+FROM composer as dep
+
+WORKDIR /app/
+
+COPY . ./
+
+RUN composer install --ignore-platform-reqs  --no-scripts --no-suggest --optimize-autoloader
+
+FROM php:7.4 as web
+
+COPY . /var/www
+
 WORKDIR /var/www
 
-RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-RUN php -r "if (hash_file('sha384', 'composer-setup.php') === '756890a4488ce9024fc62c56153228907f1545c228516cbf63f885e036d37e9a59d27d63f46af1d4d07ee0f76181c7d3') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
-RUN php composer-setup.php
-RUN php -r "unlink('composer-setup.php');"
-RUN mv composer.phar /usr/local/bin/composer
-RUN apt update && apt install -y git unzip zip
-RUN composer install
+RUN usermod -u 1000 www-data && groupmod -g 1000 www-data
+
+RUN  apt-get update -y && apt-get install -y libmcrypt-dev openssl git zip \
+        && docker-php-ext-install pdo_mysql
+
+COPY --from=dep /app/vendor /var/www/vendor
+
+# VOLUME ["./vendor", "/var/www/vendor"]
+
 
 EXPOSE 8000

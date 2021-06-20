@@ -1,36 +1,41 @@
-version :  "3.9"
+version :  "3.0"
 
 services:
-    web: 
+    web:
         build:
             context: .
             dockerfile: Dockerfile
+            target: web
         container_name: queue
-        command: php artisan serve
+        command: bash -c "php artisan serve --host 0.0.0.0"
+        # command: php -S 127.0.0.1:8000 - Rodar com WSL
         depends_on:
             - banco
-        volumes: 
-            - ./:/var/www
-        environment: 
+        volumes:
+            - ".:/var/www"
+        environment:
             DB_HOST: banco
             DB_DATABASE: laravel
             DB_PASSWORD: 123
+            DB_USERNAME: usuario
         ports:
-            - "8080:8000"
+            - 8080:8000
         networks:
             - app-network
-    
+
     banco:
-        image: mysql:5.7.22
+        image: mysql:5.7
         container_name: db
-        tty: true
+        restart: unless-stopped
+        expose:
+            - 3306
         ports:
-            - "3306:3306"
+            - 3306:3306
         environment:
             MYSQL_DATABASE: laravel
             MYSQL_ROOT_PASSWORD: 123
-            SERVICE_TAGS: dev
-            SERVICE_NAME: mysql
+            MYSQL_PASSWORD: 123
+            MYSQL_USER: usuario
         networks:
             - app-network
 
