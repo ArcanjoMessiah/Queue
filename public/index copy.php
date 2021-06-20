@@ -54,4 +54,21 @@ $response = tap($kernel->handle(
 
 $kernel->terminate($request, $response);
 
+{{ Form::open(array('url' => 'foo/bar')) }}
 
+    echo Form:: label ('queue_test', 'Teste_fila', array('class' =>'tests'))
+        echo Form:: number ('Atendimentos','$atendimentos');
+        echo Form:: number ('Whatsapp','$whatsapp');
+        echo Form:: number ('Whatsappmax','$whatsappmax');
+        echo Form:: number ('Chat','$chat');
+        echo Form:: number ('Chatmax','$chatmax');
+        echo Form:: number ('Totalatendimentos','$tatendimentos');
+        echo Form:: number ('Atendentes','$atendentes');
+        echo Form:: number ('','$atendimentos');
+
+        echo Form:: submit('Iniciar teste')  
+        echo Form:: reset ('Limpar')
+
+    
+
+{{ Form::close() }}
