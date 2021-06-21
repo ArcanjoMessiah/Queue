@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AtendenteController;
+use App\Http\Controllers\ChamadaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +15,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [AtendenteController::class, 'list']);
+Route::get('/chamada', [ChamadaController::class, 'list']);
+Route::get('/atendente/criar', [AtendenteController::class, 'create']);
+Route::post('/atendente/criar', [AtendenteController::class, 'store'])->name('atendente.criar') ;
+
+
+
+

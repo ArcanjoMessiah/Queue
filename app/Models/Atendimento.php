@@ -23,12 +23,12 @@ class Atendimento extends Model
     
     public function chamada() 
     {
-        return $this->belongsTo(Chamada:class)
+        return $this->belongsTo(Chamada::class);
     }
 
     public function atendente() 
     {
-        return $this->belongsTo(Atendente:class)
+        return $this->belongsTo(Atendente::class);
     }
 
 }

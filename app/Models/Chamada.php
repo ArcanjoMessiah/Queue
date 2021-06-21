@@ -20,7 +20,7 @@ class Chamada extends Model
 
     public function atendimentos() 
     {
-        return $this->hasMany(Atendimento:class)
+        return $this->hasMany(Atendimento::class);
     }
 }
 

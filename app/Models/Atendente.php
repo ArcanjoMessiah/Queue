@@ -16,5 +16,13 @@ class Atendente extends Model
     protected $table = 'atendente';
     protected $primaryKey = 'id';
     public $timestamps = false;
-    
+
+public function atendimentos() 
+    {
+        return $this->hasMany(Atendimento::class);
+    }
+
+
 }
+
+
