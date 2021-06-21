@@ -10,10 +10,10 @@ class Atendimento extends Model
     use HasFactory;
 
     protected $fillable = [
-        'created_at'
-        'finish_at'
-        'started_at'
-        'atendente_id'
+        'created_at',
+        'finish_at',
+        'started_at',
+        'atendente_id',
         'chamada_id'
     ];
 

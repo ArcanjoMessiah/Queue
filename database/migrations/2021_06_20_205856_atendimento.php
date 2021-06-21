@@ -16,8 +16,9 @@ class Atendimento extends Migration
           Schema::create('atendimento', function (Blueprint $table) {
             $table->id();
             $table->date('created_at');
-            $table->date('finish_at');
-            $table->date('started_at');
+            $table->date('updated_at');
+            $table->date('finish_at')->nullable();
+            $table->date('started_at')->nullable();
             $table->bigInteger('atendente_id')->unsigned();
             $table->bigInteger('chamada_id')->unsigned();
 
