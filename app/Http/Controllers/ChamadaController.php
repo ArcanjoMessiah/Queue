@@ -13,4 +13,20 @@ class ChamadaController extends Controller
             'chamadas' => Chamada::all()
         ]);
     }
+
+    public function create()
+    {
+        return view('chamada.create');
+    }
+
+
+    public function store(Request $request)
+    {
+        $chamada = Chamada::create($request->all());
+        $chamada->save();
+        return view('chamada.lista', [
+            'chamadas' => Chamada::all(),
+            'cadastro' => true
+        ]);
+    }
 }

@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Lista de atendentes</title>
+        <title>Lista de chamadas</title>
     </head>
     <body>
 
@@ -12,8 +12,9 @@
             
             @endif 
     
-        @foreach ($atendentes as $atendente)
-            {{ $atendente->nome }}
+        @foreach ($chamadas as $chamada)
+            {{ $chamada->origem }}
+        
             <br/>
         @endforeach
         
