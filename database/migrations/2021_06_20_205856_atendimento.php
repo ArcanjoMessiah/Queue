@@ -32,7 +32,9 @@ class Atendimento extends Migration
      */
     public function down()
     {
-       Schema::dropIfExists('atendimento');
+       
+        Schema::dropIfExists('atendimento');
+
     }
     
 }
